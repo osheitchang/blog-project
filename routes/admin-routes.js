@@ -5,20 +5,20 @@ const User    = require('../models/User');
 
 
 
-router.use((req, res, next)=>{
+// router.use((req, res, next)=>{
       
-    if(!req.user){
-        req.flash('error', 'please log in to use this feature')
-        res.redirect('/login')
-    }
-    if(!req.user.isAdmin){
-        req.flash('error', 'you do not have access to this feature')
-        res.redirect('/')
-    }
+//     if(!req.user){
+//         // req.flash('error', 'please log in to use this feature')
+//         res.redirect('/login')
+//     }
+//     if(!req.user.isAdmin){
+//         req.flash('error', 'you do not have access to this feature')
+//         res.redirect('/')
+//     }
   
-    next();
-    // if you forget to put next() your app will freeze anytime you go to an admin route
-  })
+//     next();
+//     // if you forget to put next() your app will freeze anytime you go to an admin route
+//   })
 
 
 

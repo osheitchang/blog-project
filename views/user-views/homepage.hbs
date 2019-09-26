@@ -1,0 +1,73 @@
+<h1>{{theUser}}</h1>
+<h2 style="color:white">Welcome {{user.username}}</h2>
+
+<form action="user/delete/{{user._id}}" method="POST">
+  <button type="summit">Delete</button>
+</form>
+<form action="user/update/{{user._id}}" method="GET">
+  <button type="summit">Update</button>
+</form>
+<a href="/create-new-blog">Create a new Blog</a>
+<!-- You cant make a post request with an <a> tag -->
+
+{{#each blog}}
+<div class ="blog-content">
+`
+<h3>Title: {{this.title}}</h3>
+
+<h3>Body: {{this.body}}</h3>
+
+<h3>Author: {{this.author}}</h3>
+
+</div>
+
+<form action="blog/update/{{this._id}}" method="GET">
+  <button type="summit">Update</button>
+</form>
+<form action="blog/delete/{{this._id}}" method="POST">
+  <button type="summit">Delete</button>
+</form>
+{{/each}}
+
+{{#unless theUser}}
+
+.name<form action="">
+
+  <input type="text" name="body">
+</form>
+{{/unless}}
+
+
+{{!-- 
+
+{{#if theUser}}
+<a href="/secret">Secret Page</a>
+{{/if}}
+
+{{#each books}}
+
+<a href="/books/details/{{this._id}}">
+
+
+<h2>
+{{this.title}}
+</h2>
+
+</a>
+
+
+
+<form action="/books/delete/{{this._id}}" method="POST">
+    <button>Delete This Book</button>
+</form>
+
+
+<a href="/books/editbook/{{this._id}}">Edit This Book's Info</a>
+
+
+
+
+
+
+
+{{/each}} --}}

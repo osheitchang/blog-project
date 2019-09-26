@@ -9,10 +9,29 @@ mongoose
 
   
 
- User.create({
-  username : 'Osheit',
-  email: 'osheit@sample.com',
-  password: 'samplepassword',
+//  User.create({
+//   username : 'Osheit',
+//   email: 'osheit@sample.com',
+//   password: 'samplepassword',
+//   // posts: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+//   profilePicture: 'ImgURL'
+
+// })
+// .then((result)=>{
+
+//   res.redirect('/')
+//   //its literally sending us to localhost:3000/books
+
+// })
+// .catch((err)=>{
+//   next(err);
+// })
+
+
+Blog.create({
+  title : 'This is an example title',
+  body: 'This is an example message with no relevant information ',
+  author:author: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   // posts: [{ type: Schema.Types.ObjectId, ref: 'users' }],
   profilePicture: 'ImgURL'
 
@@ -26,6 +45,14 @@ mongoose
 .catch((err)=>{
   next(err);
 })
+
+
+
+title : String,
+body: String,
+author: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+likes:[{ type: Schema.Types.ObjectId, ref: 'User' }],
+comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 
 
 //  Book.create({name: "Of Mice and Men"})

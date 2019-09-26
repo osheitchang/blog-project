@@ -5,7 +5,8 @@ const blogSchema = new Schema({
 
   title : String,
   body: String,
-  author: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  author: String,
+  likes:[{ type: Schema.Types.ObjectId, ref: 'User' }],
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 })
 

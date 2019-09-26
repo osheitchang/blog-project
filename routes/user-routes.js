@@ -1,11 +1,9 @@
 const express  = require('express');
 const router   = express.Router();
-
+const passport = require("passport");
 const User     = require('../models/User');
+const Blog     = require('../models/Blog');
 const bcrypt   = require('bcryptjs');
-
-const passport = require('passport');
-
 
 
 router.get('/signup', (req, res, next)=>{
@@ -14,8 +12,6 @@ router.get('/signup', (req, res, next)=>{
 
 })
 // you can have routes with the same name if one is get and one is post
-
-
 
 router.post('/signup', (req, res, next)=>{
 
@@ -40,7 +36,7 @@ router.post('/signup', (req, res, next)=>{
     }
 
 
-    console.log('-===========', admin)
+    console.log('===========', admin)
 
 
 
@@ -50,7 +46,6 @@ router.post('/signup', (req, res, next)=>{
 
     const salt  = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
-
 
 
     User.create({
@@ -68,6 +63,19 @@ router.post('/signup', (req, res, next)=>{
     })
 })
 
+router.get('/homepage',(req,res,next)=>{
+    // console.log('this is req>>>>>>>>>>>>>>>',req)
+    console.log('this is req --------------------------------------->>>', req)
+    console.log(req.user)
+    const user = req.user
+    Blog.find()
+    .then((allBlogs)=>{
+        res.render('user-views/homepage', {blog: allBlogs, user: user})
+    })
+    .catch((err)=>{
+        next(err)
+    })
+})
 
 
 router.get('/login', (req, res, next)=>{
@@ -76,18 +84,62 @@ router.get('/login', (req, res, next)=>{
 
 })
 
-
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/homepage",
     failureRedirect: "/login",
-    failureFlash: true,
+    // failureFlash: true,
     passReqToCallback: true
-  }));
+  }))
+
+
+  router.post('/logout', (req, res, next)=>{
+
+    req.session.destroy();
+
+    res.redirect('/');
+
+})
+
+
+router.get('/delete', (req, res, next)=>{
+
+});
+
+
+// router.post("/login", (req,res,next)=>{
+//     let username = req.body.username
+//     let password = req.body.password
+
+//     User.find({username:username})
+//     .then()
+//         res.redirect('/homepage')
+//     }
+//     else{
+//         res.redirect('/login')
+//         console.log(">>>>>>>>>>>>>>>>>>>>> Login failed",username)}
+        
+        
+//     })
+    // .catch((err)=>{
+    //     next(err)
+    // })
+    // if(CONDITION){
+    //     res.render('/user-views/homepage')
+    // } else{res.redirect('/login').then({})}
+// })
+    
+    
+    //passport.authenticate("local",^
+    
+    // successRedirect: "/",
+    // failureRedirect: "/login",
+    // failureFlash: true,
+    // passReqToCallback: true
+//   }));
 
 
 
-
-router.post('/logout',(req, res, next)=>{
+router.get('/logout',(req, res, next)=>{
 
     req.logout();
     // passport has its own req.logout method for you because req.session.destroy() just wasn't easy enough
@@ -145,6 +197,75 @@ router.get(
     })
   );
 
+
+
+
+  router.post('/user/delete/:id', (req, res, next)=>{
+    let id=req.params.id;
+    User.findByIdAndRemove(id)
+    .then((theUser)=>{
+        req.logOut()
+        res.redirect('/login')
+    })
+    .catch((err)=>{
+        next(err)
+    })
+})
+
+
+router.get('/user/update/:id',(req, res, next)=>{
+    const user = req.user
+    res.render('user-views/userUpdate', {user:user})
+})
+
+
+router.post('/user/update/:id',(req, res, next)=>{
+    let id = req.params.id
+    console.log(req.body)
+    User.findByIdAndUpdate(id, {username: req.body.theUsername})
+    .then(result=>{
+        console.log(result)
+        res.redirect('/homepage')
+    })
+    .catch((err)=>{
+        next(err)
+    })
+    
+})
+
+
+
+//   router.get('/books/editbook/:id', (req, res, next)=>{
+//     let id=req.params.id;
+
+//     Book.findById(id)
+//     .then((theBook)=>{
+//         Author.find()
+//         .then((allAuthors)=>{
+
+//             allAuthors.forEach((eachAuthor)=>{
+//                 if(eachAuthor._id.equals(theBook.author)){
+//                     // we're not allowed to use === to compare IDs
+//                     // just because mongoose wont let you
+//                     // but instead they have their own method called .equals
+                    
+//                     eachAuthor.isTheChosenOne = true;
+//                 }
+//             })
+
+//             res.render('book-views/edit', {book: theBook, authors:allAuthors})
+//         })
+//         .catch((err)=>{
+//             next(err);
+//         })
+//     })
+//     .catch((err)=>{
+//         next(err)
+//     })
+// })
+
+
+//loged in user routes
 
 
 
