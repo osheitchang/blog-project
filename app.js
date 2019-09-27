@@ -18,7 +18,6 @@ const uploadCloud = require('./config/cloudinary');
 
 
 const app = express();
-
 app.use(session({
   secret: "shhh-super-sectet-key",
   cookie: { maxAge: 60000 },
@@ -138,7 +137,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
-app.use(express.static('./public/images'))
+app.use(express.static('./public/images'));
 
 const index = require('./routes/index');
 app.use('/', index);

@@ -7,6 +7,10 @@ router.get('/create-new-blog', (req,res,next)=>{
   res.render('blog-views/new-blog')
 })
 
+router.get('/feature-blog', (req,res,next)=>{
+    res.render('blog-views/feature-blog')
+  })
+
 router.post('/create-new-blog',(req,res,next)=>{
 
     // console.log('=-=-=--=--=', req.body)

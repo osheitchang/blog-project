@@ -16,10 +16,12 @@ a {
     flex-direction:column;
     width: 14em;
     margin: 3em;
+    padding-bottom:3em;
     border: 2px solid rgb(250, 250, 250);
     background-color: #00B7FF;
     border-radius: 9px;
     color:white;
+    
     }
   
   h3{
@@ -48,7 +50,6 @@ a {
     background-color: #f8f8f8;
     resize: none;
   }
-
 
 
 #profile-picture{
@@ -139,5 +140,23 @@ a {
   }
 }
 
+.bsbadges {
+  display: flex;
+  justify-content:center;
+  margin-top:1em;
+  padding:0 -9em;
+}
+
+.bsmedia {
+  margin-top:7em;
+}
+
+.right-container{
+  margin-left:5em;
+  
+}
+
 landing-page{
 }
+
+

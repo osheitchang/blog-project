@@ -1,9 +1,21 @@
 <section id="homepage">
-
+  <div class="jumbotron"  style= "background-color:rgb(95, 95, 95)">
+    <h1 class="display-4">Mount Mazama</h1>
+    <p class="lead">is a complex volcano in the American part of the Cascade Range whose collapsed caldera holds ...</p>
+    <hr class="my-4">
+    <p>Click to learn more</p>
+    <a class="btn btn-primary btn-lg" href="feature-blog" role="button">Learn more</a>
+  </div>
   <div class='container'>
     <div class="profile-info">
       <img id="profile-picture" src="{{user.imgPath}}" alt="this user does not have a picture">
-
+      <div>
+        <h3>Next Level</h3>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100">25%</div>
+        </div>
+      </div>
       <h2>Welcome {{user.username}}</h2>
       {{!-- <h2 style="color:white">Welcome {{user.username}}</h2> --}}
       <div class='buttons'>
@@ -18,8 +30,10 @@
       </div>
     </div>
     <div class='feed'>
+
       {{#each blog}}
       <div class="blog-content">
+
         <div class="profile-and-username">
           <img src="{{../user.imgPath}}" alt="this user does not have a picture">
           <h3>{{this.author}}</h3>
@@ -39,12 +53,44 @@
             <button type="summit">Delete</button>
           </form>
         </div>
+        <div class='bsbadges'>
+          <a href="#" class="badge badge-primary">Like</a>
+          <a href="#" class="badge badge-success">Save</a>
+          <a href="#" class="badge badge-danger">unlike</a>
+          <a href="#" class="badge badge-warning">Report</a>
+          <a href="#" class="badge badge-info">Info</a>
+        </div>
       </div>
       {{/each}}
     </div>
+    <div class='bscard right-container'>
+      <div class="card" style="width: 18rem;">
+        <img src="/bag-book-briefcase-2977304.jpg" class="card-img-top" alt="...">
+        {{!-- https://images.pexels.com/photos/2977304/pexels-photo-2977304.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260 --}}
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+      <div class='bsmedia right-container'>
+        <div class="media">
+          <div class="media-body">
+            <h5 class="mt-0 mb-1">Media object</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
+            vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
+            lacinia congue felis in faucibus.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- this is the ads that I wanted to use but then I din't-->
+    {{!-- </div>
     <div class="ads">
     <h2>Ads</h2>
-  </div>
+  </div> --}}
     {{#unless theUser}}
 
     {{!-- .name<form action=""> --}}
@@ -52,10 +98,8 @@
     {{!-- <input type="text" name="body"> --}}
     </form>
     {{/unless}}
-
-
   </div>
-  
+
 </section>
 
 
@@ -68,7 +112,7 @@
 
 
 
-    {{!-- 
+{{!-- 
 
 {{#if theUser}}
 <a href="/secret">Secret Page</a>

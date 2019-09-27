@@ -13,6 +13,7 @@ a {
   flex-direction: column;
   width: 14em;
   margin: 3em;
+  padding-bottom: 3em;
   border: 2px solid #fafafa;
   background-color: #00B7FF;
   border-radius: 9px;
@@ -108,5 +109,17 @@ a {
   align-items: center; }
   .landing-page p {
     padding: 0 5em; }
+
+.bsbadges {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  padding: 0 -9em; }
+
+.bsmedia {
+  margin-top: 7em; }
+
+.right-container {
+  margin-left: 5em; }
 
 /*# sourceMappingURL=style.css.map */
