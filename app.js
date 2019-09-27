@@ -43,7 +43,8 @@ app.use((req, res, next)=>{
 
 
 mongoose
-  .connect('mongodb://localhost/blog', {useNewUrlParser: true})
+  // .connect('mongodb://localhost/blog', {useNewUrlParser: true})
+  .connect('  mongodb+srv://ochang:ochang@cluster0-o2poa.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
