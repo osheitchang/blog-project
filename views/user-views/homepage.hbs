@@ -1,44 +1,74 @@
-<h1>{{theUser}}</h1>
-<h2 style="color:white">Welcome {{user.username}}</h2>
+<section id="homepage">
 
-<form action="user/delete/{{user._id}}" method="POST">
-  <button type="summit">Delete</button>
-</form>
-<form action="user/update/{{user._id}}" method="GET">
-  <button type="summit">Update</button>
-</form>
-<a href="/create-new-blog">Create a new Blog</a>
-<!-- You cant make a post request with an <a> tag -->
+  <div class='container'>
+    <div class="profile-info">
+      <img id="profile-picture" src="{{user.imgPath}}" alt="this user does not have a picture">
 
-{{#each blog}}
-<div class ="blog-content">
-`
-<h3>Title: {{this.title}}</h3>
+      <h2>Welcome {{user.username}}</h2>
+      {{!-- <h2 style="color:white">Welcome {{user.username}}</h2> --}}
+      <div class='buttons'>
+        <form action="user/delete/{{user._id}}" method="POST">
+          <button type="summit">Delete User</button>
+        </form>
+        <form action="user/update/{{user._id}}" method="GET">
+          <button type="summit">Update User</button>
+        </form>
+        <a href="/create-new-blog">Create a new Blog</a>
+        <!-- You cant make a post request with an <a> tag -->
+      </div>
+    </div>
+    <div class='feed'>
+      {{#each blog}}
+      <div class="blog-content">
+        <div class="profile-and-username">
+          <img src="{{../user.imgPath}}" alt="this user does not have a picture">
+          <h3>{{this.author}}</h3>
+        </div>
+        <h3> {{this.title}}</h3>
+        <div class='blog-body'>
+          <h3> {{this.body}}</h3>
+        </div>
+        {{!-- <div class='icons'>
+          <img src="../../public/images/chat.png" alt="functional icons">
+      </div> --}}
+        <div class='blog-buttons'>
+          <form action="blog/update/{{this._id}}" method="GET">
+            <button type="summit">Update</button>
+          </form>
+          <form action="blog/delete/{{this._id}}" method="POST">
+            <button type="summit">Delete</button>
+          </form>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class="ads">
+    <h2>Ads</h2>
+  </div>
+    {{#unless theUser}}
 
-<h3>Body: {{this.body}}</h3>
+    {{!-- .name<form action=""> --}}
 
-<h3>Author: {{this.author}}</h3>
-
-</div>
-
-<form action="blog/update/{{this._id}}" method="GET">
-  <button type="summit">Update</button>
-</form>
-<form action="blog/delete/{{this._id}}" method="POST">
-  <button type="summit">Delete</button>
-</form>
-{{/each}}
-
-{{#unless theUser}}
-
-.name<form action="">
-
-  <input type="text" name="body">
-</form>
-{{/unless}}
+    {{!-- <input type="text" name="body"> --}}
+    </form>
+    {{/unless}}
 
 
-{{!-- 
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+
+    {{!-- 
 
 {{#if theUser}}
 <a href="/secret">Secret Page</a>

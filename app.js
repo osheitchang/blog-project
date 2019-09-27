@@ -13,9 +13,11 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require('./models/User')
+const uploadCloud = require('./config/cloudinary');
+
+
 
 const app = express();
-
 
 app.use(session({
   secret: "shhh-super-sectet-key",
@@ -71,6 +73,15 @@ mongoose
   });
   
   passport.use(new LocalStrategy((username, password, next) => {
+
+
+    const salt  = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+    
+    
+    
+    
+    
     User.findOne({ username }, (err, user) => {
       if (err) {
         return next(err);
@@ -78,7 +89,7 @@ mongoose
       if (!user) {
         return next(null, false, { message: "Incorrect username" });
       }
-      if (!bcrypt.compareSync(password, user.password)) {
+      if (!bcrypt.compareSync(password, hash)) {
         return next(null, false, { message: "Incorrect password" });
       }
   
@@ -113,15 +124,21 @@ app.use(require('node-sass-middleware')({
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); 
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+// app.use(bloggy(path.join(__dirname, 'public', 'images', 'Bloggy.png')));
 
+// app.get('/', function(req, res){
+//   res.sendFile(__dirname+'/public/images/bloggy.png'); // change the path to your index.html
+// });
 
+// app.use(express.static('/public/images')); 
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
+app.use(express.static('./public/images'))
 
 const index = require('./routes/index');
 app.use('/', index);
@@ -133,7 +150,7 @@ const userRoutes = require('./routes/user-routes');
 app.use('/', userRoutes);
 
 
-const adminRoutes = require('./routes/admin-routes');
+const adminRoutes = require('./routes/admin-routes'); 
 app.use('/', adminRoutes);
 
 const blogRoutes = require('./routes/blog-routes');

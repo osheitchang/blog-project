@@ -1,15 +1,15 @@
 $bgColor: rgb(102, 102, 102);
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color:white;
+  background-color: #00B7FF;
+  margin: 3em;
 }
 
 a {
   color: #00B7FF;
 }
-
-body{
-  // background-color: $bgColor;
 
   .blog-content{
     display: flex;
@@ -18,16 +18,17 @@ body{
     margin: 3em;
     border: 2px solid rgb(250, 250, 250);
     background-color: #00B7FF;
-    border-radius: 15px;
+    border-radius: 9px;
     color:white;
     }
   
   h3{
     margin: 1em;
+    font-size:20px;
   }
   form {
     button{     
-      background-color: #00B7FF;
+      background-color: rgb(0, 125, 241);
       border: none;
       border-radius: 13px;
       color: white;
@@ -36,7 +37,6 @@ body{
       margin: 4px 2px;
       cursor: pointer;
     }
-    
   }
   textarea {
     width: 100%;
@@ -48,9 +48,96 @@ body{
     background-color: #f8f8f8;
     resize: none;
   }
-  
-  
+
+
+
+#profile-picture{
+  height:15em;
+  width: 15em;
+  border-radius: 6000em;
+  border:4px solid white;
 }
+
+#slogan{
+  display: flex;
+  justify-content: center;
+  font-size: 3em;
+}
+
+#homepage{
+}
+
+
+.container {
+  display:flex;
+  justify-content: flex-start;
+}
+
+.blog-buttons {
+  padding-top: 4em;
+  display: flex;
+  justify-content: center;
+}
+
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #5f5f5f;
+  width: 23em;
+  padding: 3em 2em;
+  border-radius: 11px;
+}
+
+a {
+  text-decoration: none;
+  color: #e7c70f
+}
+
+
+.feed {
+  display: flex;
+  flex-direction:column;
+}
+
+.blog-body {
+  border: 1px solid white;
+  margin: 0 1em;
+  h3 {
+    font-size: 10px;
+  }
+}
+
+.profile-and-username{
+  display:flex;
+  margin:.3em;
+
+  img{
+    height:3em;
+    width: 3em;
+    border-radius: 6000em;
+    border:4px solid white;
+
+  }
+}
+.ads {
+  background-color: #5f5f5f;
+  margin-top: -4em;
+  padding-right:1em;
+  width:300em;
+  margin-left:10em;
+}
+
 .landing-page{
-  // background-color: $bgColor;
+  background-color: rgb(49, 63, 72);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  p{
+    padding: 0 5em;
+  }
+}
+
+landing-page{
 }

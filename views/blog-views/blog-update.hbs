@@ -1,0 +1,18 @@
+<h1>Update</h1>
+
+<form action="/blog/update/{{blog._id}}" method="POST">
+
+{{blog.theTitle}}
+{{blog.theBody}}
+
+
+<p>Title</p>
+<input type="text" name="theTitle" placeholder='New Title'>
+
+<p>Body</p>
+<input type="text" name="theBody" placeholder='New Body'>
+
+
+
+<button>Submit</button>
+</form>

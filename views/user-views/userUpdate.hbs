@@ -1,15 +1,40 @@
-<h1>Signup</h1>
+<h2>Update your blog here!</h2>
 
-<form action="/user/update/{{user._id}}" method="POST">
+
+<form action="/user/update/{{id}}" method="POST">
 
 
 <p>Username</p>
 <input type="text" name="theUsername">
 
-<p>Password</p>
-<input type="password" name="thePassword">
+
+<p>Old Password</p>
+<input type="text" name="theOldPass">
+
+<p>New Password</p>
+<input type="text" name="theNewPass">
+
+{{!-- <select name="theBody"> --}}
+
+    {{!-- <option value="" selected disabled>Please Select One</option> --}}
+
+{{!-- {{#each allTheAuthors}} --}}
+{{!-- THIS IS A COMMENT -----> ^ THAT'S NOT ^ the array of authors gets pulled from the Database  --}}
+<option value="{{this._id}}">{{this.name}}</option>
+
+{{!-- {{/each}} 
 
 
+</select> --}}
 
-<button>Submit</button>
+
+<p>Image</p>
+<input type="text" name="theImage">
+
+
+<button>Save</button>
+
 </form>
+
+
+<button>submit</button>

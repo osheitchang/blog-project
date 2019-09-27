@@ -7,7 +7,7 @@ const userSchema = new Schema({
   email: String,
   password: String,
   posts: [{ type: Schema.Types.ObjectId, ref: 'Blog' }],
-  profilePicture: String
+  imgPath: String
 
 })
 

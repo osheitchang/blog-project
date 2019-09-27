@@ -4,6 +4,7 @@ const passport = require("passport");
 const User     = require('../models/User');
 const Blog     = require('../models/Blog');
 const bcrypt   = require('bcryptjs');
+const uploadCloud = require('../config/cloudinary');
 
 
 router.get('/signup', (req, res, next)=>{
@@ -13,7 +14,7 @@ router.get('/signup', (req, res, next)=>{
 })
 // you can have routes with the same name if one is get and one is post
 
-router.post('/signup', (req, res, next)=>{
+router.post('/signup',uploadCloud.single('photo'),(req, res, next)=>{
 
     let admin = false;
 
@@ -36,14 +37,16 @@ router.post('/signup', (req, res, next)=>{
     }
 
 
-    console.log('===========', admin)
+    console.log('===========', req.file)
 
 
 
     const username = req.body.theUsername;
     const password = req.body.thePassword;
-
-
+    // const imgPath =null
+    if(req.file){
+        imgPath = req.file.url
+    }
     const salt  = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
@@ -51,11 +54,12 @@ router.post('/signup', (req, res, next)=>{
     User.create({
         username: username,
         password: hash,
-        isAdmin: admin
+        isAdmin: admin,
+        imgPath:imgPath
     })
     .then((result)=>{
-
-        res.redirect('/')
+        console.log(result)
+        res.redirect('/login')
 
     })
     .catch((err)=>{
@@ -214,24 +218,13 @@ router.get(
 
 
 router.get('/user/update/:id',(req, res, next)=>{
-    const user = req.user
-    res.render('user-views/userUpdate', {user:user})
-})
-
-
-router.post('/user/update/:id',(req, res, next)=>{
     let id = req.params.id
-    console.log(req.body)
-    User.findByIdAndUpdate(id, {username: req.body.theUsername})
-    .then(result=>{
-        console.log(result)
-        res.redirect('/homepage')
-    })
-    .catch((err)=>{
-        next(err)
-    })
-    
+    const user = req.user
+    res.render('user-views/userUpdate', {user:user, id:id})
 })
+
+
+// 
 
 
 
@@ -266,6 +259,64 @@ router.post('/user/update/:id',(req, res, next)=>{
 
 
 //loged in user routes
+
+// router.post('/user/update/:id',(req, res, next)=>{
+//         let id = req.params.id
+//         console.log(req.body)
+//         User.findByIdAndUpdate(id, {username: req.body.theUsername, password: req.body.thePassword })
+//         .then(result=>{
+//             console.log(result)
+//             res.redirect('/homepage')
+//         })
+//         .catch((err)=>{
+//             next(err)
+//         })
+        
+//     })
+
+router.post("/user/update/:id", (req,res,next) => {
+
+    let id = req.params.id
+    let username = req.body.theUsername;
+    // let email = req.body.theEmail;
+    let oldpass = req.body.theOldpass;
+    let newpass = req.body.theNewpass;
+
+      User.findByIdAndUpdate(id, {
+        username: username,
+        password: newpass,
+      }).then(data => {
+        // req.flash('success', "you've changed your info!")
+        res.redirect('/homepage')
+      }).catch(err => next(err))
+       const saltRounds = 10;
+  
+      const salt  = bcrypt.genSaltSync(saltRounds);
+      const hashPass = bcrypt.hashSync(newpass, salt);
+    
+    
+      if (!bcrypt.compareSync(oldpass, req.user.password)) {
+        req.flash('error', `your old password is incorrect`)
+        res.redirect('/user/profile')
+      }
+    
+      if (bcrypt.compareSync(oldpass, req.user.password)) {
+        User.findByIdAndUpdate(id, {
+          username: name,
+          email: email,
+          password: hashPass
+    
+        }).then(data => {
+          req.flash('success', "you've changed your info!")
+          res.redirect('/homepage')
+        }).catch(err => next(err))
+      }
+  })
+  
+
+
+
+
 
 
 
